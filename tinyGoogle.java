@@ -32,7 +32,7 @@ public class tinyGoogle {
 					//{
 						//if(queryInput[i].equals(itr[0]))
 						//{
-							String[] tmp = itr[1].split(",");
+							String[] tmp = itr[1].split("\\t", -1);
 							word.set(tmp[0]);
 							IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
 							context.write(word, numOccurences);
