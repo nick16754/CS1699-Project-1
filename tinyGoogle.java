@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
-	public static String[] queryInput = new String[5];
+	public static String[] queryInput;
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
@@ -23,7 +23,7 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(",");
-				for(int i = 0; i<queryInput.length; i++)
+				for(int i = 0; i<queryInput.length-1; i++)
 				{
 					if(queryInput[i].equals(itr[0]))
 					{
