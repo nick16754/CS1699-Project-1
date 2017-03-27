@@ -23,7 +23,8 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(":");
-				for(int i = 0; i<queryInput.length; i++)
+				int last = queryInput.length;
+				for(int i = 0; i<last; i++)
 				{
 					if(itr[0] != null)
 					//System.out.println(itr[0] + " " + queryInput[i]);
