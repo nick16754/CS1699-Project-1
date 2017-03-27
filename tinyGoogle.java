@@ -25,21 +25,21 @@ public class tinyGoogle {
 			{
 				String[] itr = value.toString().split(":");
 				//int last = queryInput.length;
-				for(int i = 0; i<last; i++)
-				{
-					if(itr[0] != null)
+				//for(int i = 0; i<last; i++)
+				//{
+					//if(itr[0] != null)
 					//System.out.println(itr[0] + " " + queryInput[i]);
-					{
-						if(queryInput[i].equals(itr[0]))
-						{
+					//{
+						//if(queryInput[i].equals(itr[0]))
+						//{
 							String[] tmp = itr[1].split(",");
 							word.set(tmp[0]);
 							IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
 							context.write(word, numOccurences);
-							i = queryInput.length;
-						}
-					}
-				}
+							//i = queryInput.length;
+						//}
+					//}
+				//}
 			}
 		}
 
