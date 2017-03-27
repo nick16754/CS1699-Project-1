@@ -14,6 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
 	public static String[] queryInput;
+	public static int last;
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
@@ -23,7 +24,7 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(":");
-				int last = queryInput.length;
+				//int last = queryInput.length;
 				for(int i = 0; i<last; i++)
 				{
 					if(itr[0] != null)
@@ -93,6 +94,7 @@ public class tinyGoogle {
 			{
 				System.out.println(queryInput[i]);
 			}
+		last = queryInput.length;
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Rank");
