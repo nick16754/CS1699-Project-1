@@ -24,7 +24,6 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(":");
-				String term = queryInput[0];
 				String[] queryArray = queryInput.split(" ");
 				//int last = queryInput.length;
 				//for(int i = 0; i<last; i++)
