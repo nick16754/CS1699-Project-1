@@ -23,7 +23,7 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(",");
-				for(int i = 0; i<queryInput.length(); i++)
+				for(int i = 0; i<queryInput.length; i++)
 				{
 					if(queryInput[i].equals(itr[0]))
 					{
@@ -31,7 +31,7 @@ public class tinyGoogle {
 						word.set(tmp[0]);
 						IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
 						context.write(word, numOccurences);
-						i = queryInput.length();
+						i = queryInput.length;
 					}
 				}
 			}
