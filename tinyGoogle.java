@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
-	public static String[] queryInput;
+	public static String queryInput;
 	public static int last;
 	
 	public static class RankMapper
@@ -25,6 +25,7 @@ public class tinyGoogle {
 			{
 				String[] itr = value.toString().split(":");
 				String term = queryInput[0];
+				String[] queryArray = queryInput.split(" ");
 				//int last = queryInput.length;
 				//for(int i = 0; i<last; i++)
 				//{
@@ -90,12 +91,8 @@ public class tinyGoogle {
 	{
 		System.out.println("Please enter a query, each keyword seperated by a space.: ");
 		Scanner sc = new Scanner(System.in);
-		queryInput = sc.nextLine().split(" ");
-		for(int i = 0; i<queryInput.length; i++)
-			{
-				System.out.println(queryInput[i]);
-			}
-		last = queryInput.length;
+		queryInput = sc.nextLine();//.split(" ");
+		last = queryInput.split(" ").length;
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Rank");
