@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
-	String[] queryInput;
+	public String[] queryInput;
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
@@ -22,13 +22,17 @@ public class tinyGoogle {
 
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
-				String[] itr = value.toString.split(",");
-				if(Arrays.asList(queryInput).contains(itr[0]))
+				String[] itr = value.toString().split(",");
+				for(int i = 0; i<queryInput.length(); i++)
 				{
-					String[] tmp = itr[1].split(",");
-					word.set(tmp[0]);
-					IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
-					context.write(word, numOccurences);
+					if(queryInput[i].equals(itr[0]))
+					{
+						String[] tmp = itr[1].split(",");
+						word.set(tmp[0]);
+						IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
+						context.write(word, numOccurences);
+						i = queryInput.length();
+					}
 				}
 			}
 		}
@@ -89,8 +93,8 @@ public class tinyGoogle {
 		job.setReducerClass(IntSumReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-		FileInputFormat.addInputPath(job, "output");
-		FileOutputFormat.setOutputPath(job, "rankedOutput");
+		FileInputFormat.addInputPath(job, new Path("output"));
+		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
