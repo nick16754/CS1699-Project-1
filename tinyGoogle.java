@@ -23,16 +23,19 @@ public class tinyGoogle {
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(",");
-				for(int i = 0; i<queryInput.length-1; i++)
+				for(int i = 0; i<queryInput.length; i++)
 				{
-					System.out.println(itr[0] + " " + queryInput[i]);
-					if(queryInput[i].equals(itr[0]))
+					if(itr[0] != NULL)
+					//System.out.println(itr[0] + " " + queryInput[i]);
 					{
-						String[] tmp = itr[1].split(",");
-						word.set(tmp[0]);
-						IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
-						context.write(word, numOccurences);
-						i = queryInput.length;
+						if(queryInput[i].equals(itr[0]))
+						{
+							String[] tmp = itr[1].split(",");
+							word.set(tmp[0]);
+							IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
+							context.write(word, numOccurences);
+							i = queryInput.length;
+						}
 					}
 				}
 			}
@@ -85,7 +88,7 @@ public class tinyGoogle {
 		System.out.println("Please enter a query, each keyword seperated by a space.: ");
 		Scanner sc = new Scanner(System.in);
 		queryInput = sc.nextLine().split(" ");
-		for(int i = 0; i<queryInput.length-1; i++)
+		for(int i = 0; i<queryInput.length; i++)
 			{
 				System.out.println(queryInput[i]);
 			}
