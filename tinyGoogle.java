@@ -79,7 +79,7 @@ public class tinyGoogle {
 		System.exit(job.waitForCompletion(true) ? 0 : 1);*/
 	}
 	
-	public static void Rank()
+	public static void Rank() throws Exception
 	{
 		System.out.println("Please enter a query, each keyword seperated by a space.: ");
 		Scanner sc = new Scanner(System.in);
