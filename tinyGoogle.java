@@ -25,7 +25,7 @@ public class tinyGoogle {
 				String[] itr = value.toString().split(",");
 				for(int i = 0; i<queryInput.length; i++)
 				{
-					if(itr[0] != NULL)
+					if(itr[0] != null)
 					//System.out.println(itr[0] + " " + queryInput[i]);
 					{
 						if(queryInput[i].equals(itr[0]))
