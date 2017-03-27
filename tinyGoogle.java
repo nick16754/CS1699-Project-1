@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
-	public String[] queryInput = new String[5];
+	public static String[] queryInput = new String[5];
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
