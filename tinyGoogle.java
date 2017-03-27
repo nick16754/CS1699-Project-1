@@ -27,7 +27,7 @@ public class tinyGoogle {
 				{
 					String[] tmp = itr[1].split(",");
 					word.set(tmp[0]);
-					private IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
+					IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
 					context.write(word, numOccurences);
 				}
 			}
