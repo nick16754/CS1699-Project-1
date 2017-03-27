@@ -85,6 +85,10 @@ public class tinyGoogle {
 		System.out.println("Please enter a query, each keyword seperated by a space.: ");
 		Scanner sc = new Scanner(System.in);
 		queryInput = sc.nextLine().split(" ");
+		for(int i = 0; i<queryInput.length-1; i++)
+			{
+				System.out.println(queryInput[i]);
+			}
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Rank");
