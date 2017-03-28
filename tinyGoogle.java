@@ -3,6 +3,7 @@ import java.util.StringTokenizer;
 import java.util.Scanner;
 import java.util.HashMap;
 
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -110,6 +111,16 @@ public class tinyGoogle {
 		job.waitForCompletion(true);
 		
 		//now we use the HashMap rankMap to retrieve the data.
+		FileSystem fs = FileSystem.get(new Path("rankedOutput").toUri(), conf);
+		BufferedReader br=new BufferedReader(new InputStreamReader(fs.open));
+		String line;
+		line = br.readline();
+		while(line != null)
+		{
+			System.out.println(line);
+			line=br.readLine();
+		}catch (Exception e){
+		}
 		for(String key : rankMap.keySet())
 		{
 			System.out.println(key);
