@@ -128,7 +128,7 @@ public class tinyGoogle {
 		catch (Exception e){
 		}*/
 		FileSystem hdfs =FileSystem.get(conf);
-		BufferedReader bfr=new BufferedReader(new InputStreamReader(hdfs.open(new Path("rankedOutput"))));
+		BufferedReader bfr=new BufferedReader(new InputStreamReader(hdfs.open(new Path("hdfs:rankedOutput"))));
 		String str = null;
 		while ((str = bfr.readLine())!= null)
 		{
