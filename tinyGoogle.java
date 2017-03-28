@@ -120,8 +120,10 @@ public class tinyGoogle {
 		{
 			System.out.println(line);
 			line=br.readLine();
-		}catch (Exception e){
 		}
 		}
+		catch (Exception e){
+		}
+		
 	}
 }
