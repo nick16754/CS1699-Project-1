@@ -111,7 +111,7 @@ public class tinyGoogle {
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path("output"));
 		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
-		Path output = getOutputPath(job);
+		Path output = FileOutputFormat.getOutputPath(job);
 		job.waitForCompletion(true);
 		
 		//now we use the HashMap rankMap to retrieve the data.
