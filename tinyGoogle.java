@@ -105,6 +105,6 @@ public class tinyGoogle {
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path("output"));
 		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
-		System.exit(job.waitForCompletion(true) ? 0 : 1);
+		job.waitForCompletion(true) ? 0 : 1;
 	}
 }
