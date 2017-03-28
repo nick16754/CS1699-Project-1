@@ -12,7 +12,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
-//import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.util.*;
 
 /**
@@ -29,7 +28,8 @@ public class InvertedIndex {
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             String filename = ((FileSplit) context.getInputSplit()).getPath().getName();
             String line = value.toString();
-            line = line.replaceAll("[\\p{P}+~$`^=|<>~'$^+=|<>]", "");//replace all the unrelated symbols
+            // remove unwanted characters
+            line = line.replaceAll("[\\p{P}+~$`^=|<>~'$^+=|<>]", "");
             StringTokenizer itr = new StringTokenizer(line);
             while (itr.hasMoreTokens()) {
                 // as key, write word concatenated to filename with delimiter ":"
@@ -45,10 +45,10 @@ public class InvertedIndex {
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             int sum = 0;
-            String[] term = key.toString().split(":");
             for (IntWritable val : values) {
                 sum += val.get();
             }
+            // as value, write sum of number of occurances of the word in the file
             result.set(sum);
             context.write(key, result);
         }
