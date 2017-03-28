@@ -16,7 +16,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class tinyGoogle {
 	//public static String queryInput;
 	public static int last;
-	public static HashMap rankMap = new HashMap();
+	public static HashMap<String, Integer> rankMap = new HashMap();
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
