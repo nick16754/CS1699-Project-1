@@ -56,7 +56,7 @@ public class tinyGoogle {
 					sum += val.get();
 				}
 				result.set(sum);
-				context.write(key, result);
+				context.write(result, key);
 			}
 		}
 
