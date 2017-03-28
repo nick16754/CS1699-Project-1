@@ -127,14 +127,25 @@ public class tinyGoogle {
 		}
 		catch (Exception e){
 		}*/
-		FileSystem hdfs =FileSystem.get(conf);
+		/*FileSystem hdfs =FileSystem.get(conf);
 		BufferedReader bfr=new BufferedReader(new InputStreamReader(hdfs.open(new Path("hdfs:rankedOutput"))));
 		String str = null;
 		while ((str = bfr.readLine())!= null)
 		{
 			System.out.println(str);
-		}
-
+		}*/
+			try{
+            Path pt=new Path("hdfs:rankedOutput");//Location of file in HDFS
+            FileSystem fs = FileSystem.get(new Configuration());
+            BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(pt)));
+            String line;
+            line=br.readLine();
+            while (line != null){
+                System.out.println(line);
+                line=br.readLine();
+            }
+			}catch(Exception e){
+			}
 
 		
 	}
