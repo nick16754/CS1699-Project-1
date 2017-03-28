@@ -30,22 +30,17 @@ public class tinyGoogle {
 			{
 				String[] itr = value.toString().split(":");
 				String[] queryArray = query.split(" ");
-				//int last = queryInput.length;
-				//for(int i = 0; i<last; i++)
-				//{
-					//if(itr[0] != null)
-					//System.out.println(itr[0] + " " + queryInput[i]);
-					//{
-						//if(queryInput[i].equals(itr[0]))
-						//{
+				for(int i = 0; i<queryArray; i++)
+				{
+						if(queryArray[i].equals(itr[0]))
+						{
 							String[] tmp = itr[1].split("\\t", -1);
 							word.set(tmp[0]);
 							IntWritable numOccurences = new IntWritable(Integer.parseInt(tmp[1]));
 							context.write(word, numOccurences);
-							//i = queryInput.length;
-						//}
-					//}
-				//}
+							i = queryArray.length;
+						}
+				}
 			}
 		}
 
