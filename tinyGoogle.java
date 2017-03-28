@@ -19,7 +19,6 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FSDataInputStream;
 
 public class tinyGoogle {
-	//public static String queryInput;
 	public static int last;
 	public static HashMap<String, Integer> rankMap = new HashMap();
 	
@@ -101,18 +100,6 @@ public class tinyGoogle {
 			if(userInput == 2)
 				Rank();
 		} while(userInput != 3);
-		
-		/*Configuration conf = new Configuration();
-		Job job = Job.getInstance(conf, "word count");
-		job.setJarByClass(WordCount.class);
-		job.setMapperClass(TokenizerMapper.class);
-		job.setCombinerClass(IntSumReducer.class);
-		job.setReducerClass(IntSumReducer.class);
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		System.exit(job.waitForCompletion(true) ? 0 : 1);*/
 	}
 	
 	public static void Rank() throws Exception
