@@ -15,6 +15,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class tinyGoogle {
 	//public static String queryInput;
 	public static int last;
+	public static Map rankMap = new HashMap();
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
@@ -57,7 +58,7 @@ public class tinyGoogle {
 				}
 				result.set(sum);
 				context.write(key, result);
-				System.out.println("This is the result: " + result);
+				rankMap.put(key.toString(), Integer.parseInt(result.toString()));
 			}
 		}
 
