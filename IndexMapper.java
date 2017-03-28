@@ -18,9 +18,7 @@ import org.apache.hadoop.util.*;
  *
  * @author Nick Taglianetti
  */
-public class InvertedIndex {
-
-    public static class IndexMapper extends Mapper<Object, Text, Text, IntWritable> {
+    public class IndexMapper extends Mapper<Object, Text, Text, IntWritable> {
 
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
@@ -38,36 +36,3 @@ public class InvertedIndex {
             }
         }
     }
-
-    public static class IndexReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-
-        private IntWritable result = new IntWritable();
-
-        public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-            int sum = 0;
-            for (IntWritable val : values) {
-                sum += val.get();
-            }
-            // as value, write sum of number of occurances of the word in the file
-            result.set(sum);
-            context.write(key, result);
-        }
-    }
-    
-        public static void main(String[] args) throws Exception {
-        Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Inverted Index");
-        job.setJarByClass(InvertedIndex.class);
-        
-        job.setMapperClass(IndexMapper.class);
-        job.setCombinerClass(IndexReducer.class);
-        job.setReducerClass(IndexReducer.class);
-        
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
-        
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
-    }
-}
