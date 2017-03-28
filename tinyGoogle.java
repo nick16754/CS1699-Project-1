@@ -108,5 +108,11 @@ public class tinyGoogle {
 		FileInputFormat.addInputPath(job, new Path("output"));
 		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
 		job.waitForCompletion(true);
+		
+		//now we use the HashMap rankMap to retrieve the data.
+		for(String key : rankMap.keySet())
+		{
+			System.out.println(key);
+		}
 	}
 }
