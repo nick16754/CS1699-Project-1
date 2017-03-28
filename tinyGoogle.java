@@ -123,7 +123,7 @@ public class tinyGoogle {
 		last = queryInput.split(" ").length;
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
-		conf.set("queryString", queryInput);
+		conf.set("queryString", queryInput.toLowerCase());
 		Job job = Job.getInstance(conf, "Rank");
 		Job order = new Job();
 		order.setJarByClass(tinyGoogle.class);
