@@ -151,15 +151,15 @@ public class tinyGoogle {
 				System.out.println("Something went wrong while reading the file.");
 			}*/
 			Configuration conf1 = new Configuration();
-			conf1.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/core-site.xml"));
-			conf1.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/hdfs-site.xml"));
+			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/core-site.xml"));
+			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/hdfs-site.xml"));
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Enter the file path...");
 			String filePath = br.readLine();
 
 			Path path = new Path(filePath);
-			FileSystem fs = path.getFileSystem(conf1);
+			FileSystem fs = path.getFileSystem(conf);
 			FSDataInputStream inputStream = fs.open(path);
 			System.out.println(inputStream.available());
 			fs.close();
