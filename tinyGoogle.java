@@ -138,7 +138,7 @@ public class tinyGoogle {
 		System.out.println(output);
 			try{
             //Path pt=new Path(output);//Location of file in HDFS
-            FileSystem fs = FileSystem.get(new Configuration());
+            FileSystem fs = FileSystem.get(conf);
             BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(output)));
             String line;
             line=br.readLine();
