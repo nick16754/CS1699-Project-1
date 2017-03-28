@@ -150,7 +150,7 @@ public class tinyGoogle {
 			}catch(Exception e){
 				System.out.println("Something went wrong while reading the file.");
 			}*/
-			Configuration conf1 = new Configuration();
+			/*Configuration conf1 = new Configuration();
 			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/core-site.xml"));
 			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/hdfs-site.xml"));
 
@@ -162,7 +162,7 @@ public class tinyGoogle {
 			FileSystem fs = path.getFileSystem(conf);
 			FSDataInputStream inputStream = fs.open(path);
 			System.out.println(inputStream.available());
-			fs.close();
+			fs.close();*/
 
 
 		
