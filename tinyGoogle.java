@@ -13,18 +13,23 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class tinyGoogle {
-	public static String queryInput;
+	//public static String queryInput;
 	public static int last;
 	
 	public static class RankMapper
 		extends Mapper<Object, Text, Text, IntWritable>
 		{
 			private Text word = new Text();
-
+			private String query;
+			@Override
+			protected void setup(Context context) throws IOException, InterruptedException{
+				Configuration conf = context.getConfiguration();
+				query = conf.get("queryString");
+			}
 			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
 			{
 				String[] itr = value.toString().split(":");
-				String[] queryArray = queryInput.split(" ");
+				String[] queryArray = query.split(" ");
 				//int last = queryInput.length;
 				//for(int i = 0; i<last; i++)
 				//{
@@ -90,11 +95,12 @@ public class tinyGoogle {
 	{
 		System.out.println("Please enter a query, each keyword seperated by a space.: ");
 		Scanner sc = new Scanner(System.in);
-		queryInput = sc.nextLine();//.split(" ");
+		String queryInput = sc.nextLine();//.split(" ");
 		last = queryInput.split(" ").length;
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Rank");
+		conf.set("queryString", queryInput)
 		job.setJarByClass(tinyGoogle.class);
 		job.setMapperClass(RankMapper.class);
 		job.setCombinerClass(IntSumReducer.class);
