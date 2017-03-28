@@ -30,7 +30,7 @@ public class tinyGoogle {
 			{
 				String[] itr = value.toString().split(":");
 				String[] queryArray = query.split(" ");
-				for(int i = 0; i<queryArray; i++)
+				for(int i = 0; i<queryArray.length; i++)
 				{
 						if(queryArray[i].equals(itr[0]))
 						{
