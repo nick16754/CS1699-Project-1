@@ -115,10 +115,10 @@ public class tinyGoogle {
 		
 		//now we use the HashMap rankMap to retrieve the data.
 		try{
-		FileSystem fs = FileSystem.get(new Path("rankedOutput").toUri(), conf);
-		BufferedReader br=new BufferedReader(new InputStreamReader(fs.open()));
+		FileSystem fs = FileSystem.get(conf);
+		BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(new Path("rankedOutput"))));
 		String line;
-		line = br.readline();
+		line = br.readLine();
 		while(line != null)
 		{
 			System.out.println(line);
