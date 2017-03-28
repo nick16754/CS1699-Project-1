@@ -145,6 +145,7 @@ public class tinyGoogle {
                 line=br.readLine();
             }
 			}catch(Exception e){
+				System.out.println("Something went wrong while reading the file.");
 			}
 
 		
