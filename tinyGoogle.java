@@ -52,7 +52,7 @@ public class tinyGoogle {
 		}
 
 	public static class IntSumReducer
-		extends Reducer<Text,IntWritable,IntWritable,Text> 
+		extends Reducer<Text,IntWritable,Text,Text> 
 		{
 			private IntWritable result = new IntWritable();
 
@@ -63,7 +63,7 @@ public class tinyGoogle {
 					sum += val.get();
 				}
 				result.set(sum);
-				context.write(result, key);
+				context.write(new Text(result.toString), key);
 				//rankMap.put(key.toString(), Integer.parseInt(result.toString()));
 			}
 		}
