@@ -143,7 +143,7 @@ public class tinyGoogle {
         boolean invertedIndexExists = false;
         do {
             System.out.println("Welcome to tiny-Google."
-                    + "\nEnter 1 to index document(s) in input path"
+                    + "\nEnter 1 to index document(s)."
                     + "\nEnter 2 to enter a query to search for in the indexed documents."
                     + "\nEnter 3 to quit the program.\n");
             userInput = sc.nextInt();
@@ -157,8 +157,8 @@ public class tinyGoogle {
                 } else {
                     System.out.println("Please index a document first to run RnR.");
                 }
-            } else if (userInput != 1 || userInput != 2 || userInput != 3) {
-                System.out.println("Invalid tiny-Google menu option.");
+            } else if (userInput > 3 || userInput < 0) {
+                System.out.println("Invalid tiny-Google menu option.\n");
             }
         } while (userInput != 3);
     }
