@@ -114,7 +114,7 @@ public class tinyGoogle {
 		job.waitForCompletion(true);
 		
 		//now we use the HashMap rankMap to retrieve the data.
-		try{
+		/*try{
 		FileSystem fs = FileSystem.get(conf);
 		BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(new Path("rankedOutput"))));
 		String line;
@@ -126,7 +126,15 @@ public class tinyGoogle {
 		}
 		}
 		catch (Exception e){
+		}*/
+		BufferedReader bfr=new BufferedReader(new InputStreamReader(hdfs.open("rankedOutput")));
+		String str = null;
+		while ((str = bfr.readLine())!= null)
+		{
+			System.out.println(str);
 		}
+
+
 		
 	}
 }
