@@ -136,7 +136,7 @@ public class tinyGoogle {
 			System.out.println(str);
 		}*/
 		System.out.println(output);
-			try{
+			/*try{
             //Path pt=new Path(output);//Location of file in HDFS
             FileSystem fs = FileSystem.get(conf);
             BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(output)));
@@ -148,7 +148,21 @@ public class tinyGoogle {
             }
 			}catch(Exception e){
 				System.out.println("Something went wrong while reading the file.");
-			}
+			}*/
+			Configuration conf = new Configuration();
+			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/core-site.xml"));
+			conf.addResource(new Path("/hadoop/projects/hadoop-1.0.4/conf/hdfs-site.xml"));
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Enter the file path...");
+			String filePath = br.readLine();
+
+			Path path = new Path(filePath);
+			FileSystem fs = path.getFileSystem(conf);
+			FSDataInputStream inputStream = fs.open(path);
+			System.out.println(inputStream.available());
+			fs.close();
+
 
 		
 	}
