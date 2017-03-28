@@ -50,9 +50,21 @@ public class tinyGoogle {
 				}
 			}
 		}
-
+		
+		public static class OrderMapper
+		extends Mapper<Object, Text, IntWritable, Text>
+		{
+			private Text word = new Text();
+			public void map(Object key, Text value, Context context) throws IOException, InterruptedException 
+			{
+				String[] itr = value.toString().split("\\t");
+				word.set(itr[0]);
+				IntWritable numOccurences = new IntWritable(Integer.parseInt(itr[1]));
+				context.write(numOccurences, word);
+			}
+		}
 	public static class IntSumReducer
-		extends Reducer<Text,IntWritable,Text,Text> 
+		extends Reducer<Text,IntWritable,Text,IntWritable> 
 		{
 			private IntWritable result = new IntWritable();
 
@@ -63,7 +75,16 @@ public class tinyGoogle {
 					sum += val.get();
 				}
 				result.set(sum);
-				context.write(new Text(result.toString()), key);
+				context.write(key, result);
+				//rankMap.put(key.toString(), Integer.parseInt(result.toString()));
+			}
+		}
+	public static class OrderReducer
+		extends Reducer<Text,IntWritable,IntWritable,Text> 
+		{
+			public void reduce(IntWritable key, Text values, Context context) throws IOException, InterruptedException 
+			{
+				context.write(key, values);
 				//rankMap.put(key.toString(), Integer.parseInt(result.toString()));
 			}
 		}
@@ -104,16 +125,25 @@ public class tinyGoogle {
 		Configuration conf = new Configuration();
 		conf.set("queryString", queryInput);
 		Job job = Job.getInstance(conf, "Rank");
+		Job order = new Job();
+		order.setJarByClass(tinyGoogle.class);
 		job.setJarByClass(tinyGoogle.class);
 		job.setMapperClass(RankMapper.class);
+		order.setMapperClass(OrderMapper.class);
 		job.setCombinerClass(IntSumReducer.class);
 		job.setReducerClass(IntSumReducer.class);
+		order.setReducerClass(OrderReducer.class);
+		order.setOutputKeyClass(IntWritable.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
+		order.setOutputValueClass(Text.class);
 		FileInputFormat.addInputPath(job, new Path("output"));
 		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
+		FileInputFormat.addInputPath(order, new Path("rankedOutput"));
+		FileOutputFormat.setOutputPath(order, new Path("results"));
 		Path output = FileOutputFormat.getOutputPath(job);
 		job.waitForCompletion(true);
+		order.waitForCompletion(true);
 		
 		//now we use the HashMap rankMap to retrieve the data.
 		/*try{
