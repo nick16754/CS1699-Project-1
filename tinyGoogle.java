@@ -17,6 +17,7 @@ import org.apache.hadoop.fs.FSDataInputStream;
 /**
  *
  * @author Jacob Hershey
+ * @author Nick Taglianetti
  */
 public class tinyGoogle {
 
