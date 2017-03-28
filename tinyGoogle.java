@@ -111,6 +111,7 @@ public class tinyGoogle {
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path("output"));
 		FileOutputFormat.setOutputPath(job, new Path("rankedOutput"));
+		Path output = getOutputPath(job);
 		job.waitForCompletion(true);
 		
 		//now we use the HashMap rankMap to retrieve the data.
@@ -135,7 +136,7 @@ public class tinyGoogle {
 			System.out.println(str);
 		}*/
 			try{
-            Path pt=new Path("hdfs:/rankedOutput");//Location of file in HDFS
+            Path pt=new Path(output);//Location of file in HDFS
             FileSystem fs = FileSystem.get(new Configuration());
             BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(pt)));
             String line;
