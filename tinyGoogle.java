@@ -63,7 +63,7 @@ public class tinyGoogle {
 					sum += val.get();
 				}
 				result.set(sum);
-				context.write(new Text(result.toString), key);
+				context.write(new Text(result.toString()), key);
 				//rankMap.put(key.toString(), Integer.parseInt(result.toString()));
 			}
 		}
