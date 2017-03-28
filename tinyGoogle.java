@@ -100,7 +100,7 @@ public class tinyGoogle {
 		//Begin mapreduce section//
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Rank");
-		conf.set("queryString", queryInput)
+		conf.set("queryString", queryInput);
 		job.setJarByClass(tinyGoogle.class);
 		job.setMapperClass(RankMapper.class);
 		job.setCombinerClass(IntSumReducer.class);
