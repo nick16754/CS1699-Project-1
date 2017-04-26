@@ -8,7 +8,7 @@ def f(filename: String, contents: Array[String]):List[String] =
 	}
 	return curr
 }
-val source = sc.wholeTextFiles("books");
+val source = sc.wholeTextFiles("/books")
 val totalCount = source.flatMap(text => text._2.toLowerCase().split("\\s+")).map(word=> (word, 1)).reduceByKey(_+_)
 totalCount.collect().foreach(println)
 //val fileCount = source.flatMap(filename => filename._1.toLowerCase().split("\\s+")).map(name=> (name, 1)).reduceByKey(_+_)
@@ -26,3 +26,4 @@ fileCount.collect()foreach(println)
 //val res = fileCount1.map(fileText => fileText.split(",",2))
 //res.collect()foreach(println)
 //text._2.toLowerCase().split("\\s+")foreach(text._1.concat(",").concat(_))
+val query = sc.textFile("/input.txt")
