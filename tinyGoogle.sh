@@ -6,9 +6,9 @@
 echo "Welcome To tinyGoogle!"
 read -p "Please enter your search query: "
 echo "$REPLY" > input.txt
-hadoop fs -rm /input.txt
-hadoop fs -copyFromLocal input.txt /
+#hadoop fs -rm /input.txt
+#hadoop fs -copyFromLocal input.txt /
 echo "'/input.txt' contents in HDFS: "
-hadoop fs -cat /input.txt
+#hadoop fs -cat /input.txt
 echo "Running tinyGoogle with query '$REPLY' in HDFS file '/input.txt'."
-spark-shell -i tinyGoogle.scala
+./bin/spark-shell -i tinyGoogle.scala
